@@ -1,12 +1,12 @@
 import main.gameLogic.{Game, blackJack, texasHoldem}
 import main.gameLogic.Player.Player
 
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.io.StdIn.readLine
 
 object CreateGame {
   def main(args: Array[String]): Unit = {
-    var Players :ListBuffer[Player] = ListBuffer()
+    var Players :ArrayBuffer[Player] = ArrayBuffer()
 
     var warped = ""
     println("---------------------------------")
@@ -32,7 +32,7 @@ object CreateGame {
     var gamemode :Game = new Game(Players)
     if(game.toLowerCase() == "blackjack")
       {
-        gamemode =
+        gamemode = new blackJack(Players)
       }
 
   }
