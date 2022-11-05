@@ -41,9 +41,34 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
         player.handRank = handRankings(9)
       } else {
         for (c <- table) {
+          val currAmount: Int = c.cardValue
           if (firstCard.cardValue == c.cardValue || secondCard.cardValue == c.cardValue) {
             player.handRank = handRankings(9)
           }
+        }
+      }
+    }
+  }
+
+  def twoPair(): Unit = {
+    var pairCounter: Int = 0
+    for (player <- players) {
+      if (player.handRank == handRankings(9)) {
+        val firstCard: Card = player.privHand.head
+        val secondCard: Card = player.privHand(1)
+        var combinedCards: List[Int] = List()
+        for (c <- table) {
+          combinedCards = combinedCards :+ c.cardValue
+        }
+        val firstCardCount: Int = combinedCards.count(x => {x == firstCard.cardValue})
+        val secondCardCount: Int = combinedCards.count(x => {x == secondCard.cardValue})
+        if (firstCard.cardValue != secondCard.cardValue) {
+          if (firstCardCount == 1 && secondCardCount == 1) {
+            pairCounter = 2
+          }
+        }
+        if (pairCounter == 2) {
+          player.handRank = handRankings(8)
         }
       }
     }
@@ -60,6 +85,20 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
         }
         combinedCards = combinedCards :+ firstCard.cardValue
         combinedCards = combinedCards :+ secondCard.cardValue
+        for (ele <- combinedCards) {
+          var currAmount: Int = 0
+          for (e <- combinedCards) {
+            if (e == ele) {
+              currAmount += 1
+            }
+          }
+          if (currAmount == 3) {
+            player.handRank = handRankings(7)
+          }
+          if (currAmount == 4) {
+            player.handRank = handRankings(3)
+          }
+        }
       }
     }
   }
