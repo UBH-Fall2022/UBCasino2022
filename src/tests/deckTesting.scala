@@ -10,6 +10,7 @@ object deckTesting {
     println("Deck Length: " + testDeck.deckLen)
     println("Deck: " + testDeck.deckQueue)
     println("Head Card: " + testDeck.headOfDeck)
+    testDeck.printCard()
   }
 
 

@@ -7,12 +7,11 @@ class Deck() {
 
 
   var deckQueue: mutable.Queue[Card] = new mutable.Queue()
-  var headOfDeck: Card = deckQueue.head
-  val intDeck: List[Int] = List(1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+  var headOfDeck: Card = new Card
+  val intDeck: List[String] = List("2","3","4","5","6","7","8","9","10","J","Q","K","A")
   var deckLen: Int = 0
 
   def createDeck(): Unit = {
-    var i: Double = 1
     for (ele <- intDeck) {
       val createSpade: Card = new Card
       val createHeart: Card = new Card
@@ -22,12 +21,14 @@ class Deck() {
       createDiamond.setSuit("D")
       createHeart.setSuit("H")
       createSpade.setSuit("S")
-      createSpade.setSuit(i.toString)
-      createClub.setSuit(i.toString)
-      createHeart.setSuit(i.toString)
-      createDiamond.setSuit(i.toString)
-      i += 1
+      createSpade.setSign(ele)
+      createClub.setSign(ele)
+      createHeart.setSign(ele)
+      createDiamond.setSign(ele)
       deckQueue.enqueue(createSpade)
+      deckQueue.enqueue(createClub)
+      deckQueue.enqueue(createDiamond)
+      deckQueue.enqueue(createHeart)
     }
     headOfDeck = deckQueue.head
     deckLen = deckQueue.length
@@ -43,13 +44,19 @@ class Deck() {
 
   def deckShuffle(): Unit = {
     var randomList: List[Card] = List()
-    val random = new Random()
     while (deckQueue.nonEmpty) {
-      randomList = randomList :+ deckQueue(random.nextInt(deckQueue.length))
+      randomList = randomList :+ deckQueue.head
       deckQueue.dequeue()
     }
-    for (ele <- randomList) {
+    val newList = Random.shuffle(randomList)
+    for (ele <- newList) {
       deckQueue.enqueue(ele)
+    }
+  }
+
+  def printCard(): Unit = {
+    for (ele <- deckQueue) {
+      println("Card: " + ele.cardValue + " of " + ele.cardSuit)
     }
   }
 
