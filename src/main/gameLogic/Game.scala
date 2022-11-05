@@ -66,4 +66,6 @@ class Game(initPlayers: ArrayBuffer[Player]){
       player.balance -= amount
     }
   }
+  //ToDo Way to shift game to next round
+
 }

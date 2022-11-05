@@ -48,4 +48,5 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       }
     }
   }
+
 }
