@@ -1,3 +1,5 @@
-package object tests {
+package tests
+
+object playerTesting {
 
 }
