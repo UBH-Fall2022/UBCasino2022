@@ -22,7 +22,9 @@ object texasHoldEmTesting {
     testGame.addCards(5)
 
     testGame.isPair()
+    testGame.twoPair()
     testGame.isTrio()
+
 
     var i: Int = 1
     println("Table: ")
