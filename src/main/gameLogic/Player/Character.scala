@@ -6,14 +6,14 @@ abstract class Character {
   var balance: Int = 10000
   var publHand: List[Card] = List()
   var privHand: List[Card] = List()
-  var handRank: String = ""
+  var handRank: String = "High Card"
 
   def changePrice(balance: Int): Unit = {
     this.balance = balance
   }
 
   def updateCards(card: Card): Unit = {
-    cards = cards :+ card
+    privHand = privHand :+ card
   }
 
   def clearCards(): Unit = {

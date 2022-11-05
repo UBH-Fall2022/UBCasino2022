@@ -2,14 +2,15 @@ package main.gameLogic
 import main.cardLogic.Card
 import main.gameLogic.Player.Player
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   val gameType: String = "Texas Holdem"
   def deal(): Unit ={
     for(player <- players) {
-      player.cards = player.cards :+ deck.dealCard()
-      player.cards = player.cards :+ deck.dealCard()
+      player.privHand = player.privHand :+ deck.dealCard()
+      player.privHand = player.privHand :+ deck.dealCard()
     }
   }
 
@@ -34,8 +35,8 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
 
   def isPair(): Unit = {
     for (player <- players) {
-      val firstCard: Card = player.cards.head
-      val secondCard: Card = player.cards(1)
+      val firstCard: Card = player.privHand.head
+      val secondCard: Card = player.privHand(1)
       if (firstCard.cardValue == secondCard.cardValue) {
         player.handRank = handRankings(9)
       } else {
@@ -43,6 +44,38 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
           if (firstCard.cardValue == c.cardValue || secondCard.cardValue == c.cardValue) {
             player.handRank = handRankings(9)
           }
+        }
+      }
+    }
+  }
+
+  def isTrio(): Unit = {
+    for (player <- players) {
+      if (player.handRank == handRankings(9)) {
+        val firstCard: Card = player.privHand.head
+        val secondCard: Card = player.privHand(1)
+        var combinedCards: mutable.Queue[Int] = new mutable.Queue
+        for (c <- table) {
+          combinedCards.enqueue(c.cardValue)
+        }
+        combinedCards.enqueue(firstCard.cardValue)
+        combinedCards.enqueue(secondCard.cardValue)
+        var currCard: Int = combinedCards.dequeue()
+        var possible: Int = 0
+        while (combinedCards.nonEmpty) {
+          if (combinedCards.contains(currCard)) {
+            possible += 1
+            combinedCards.dequeue()
+          } else {
+            if (possible > 1) {
+              player.handRank = handRankings(7)
+            }
+            currCard = combinedCards.dequeue()
+            possible = 0
+          }
+        }
+        if (possible > 1) {
+          player.handRank = handRankings(7)
         }
       }
     }

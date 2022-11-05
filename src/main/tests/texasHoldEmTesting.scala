@@ -22,6 +22,7 @@ object texasHoldEmTesting {
     testGame.addCards(5)
 
     testGame.isPair()
+    testGame.isTrio()
 
     var i: Int = 1
     println("Table: ")
@@ -31,28 +32,28 @@ object texasHoldEmTesting {
     }
     i = 1
     println(zac.name)
-    for (c <- zac.cards) {
+    for (c <- zac.privHand) {
       println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
       i += 1
     }
     println(zac.handRank)
     i = 1
     println(ej.name)
-    for (c <- ej.cards) {
+    for (c <- ej.privHand) {
       println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
       i += 1
     }
     println(ej.handRank)
     i = 1
     println(jeremy.name)
-    for (c <- jeremy.cards) {
+    for (c <- jeremy.privHand) {
       println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
       i += 1
     }
     println(jeremy.handRank)
     i = 1
     println(journey.name)
-    for (c <- journey.cards) {
+    for (c <- journey.privHand) {
       println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
       i += 1
     }
