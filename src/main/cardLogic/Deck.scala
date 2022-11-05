@@ -35,7 +35,7 @@ class Deck() {
   }
 
   def dealCard(): Card = {
-    val retCard: Card = headOfDeck
+    val retCard: Card = deckQueue.head
     deckQueue.enqueue(deckQueue.dequeue())
     headOfDeck = deckQueue.head
     retCard
