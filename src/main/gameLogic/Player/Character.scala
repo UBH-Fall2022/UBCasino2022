@@ -10,9 +10,7 @@ abstract class Character {
     this.balance = balance
   }
 
-  def getPrice(): Unit = {
-    balance
-  }
+
 
   def updateCards(card: Card): Unit = {
     cards = cards :+ card
@@ -22,7 +20,5 @@ abstract class Character {
     cards = List()
   }
 
-  def displayCards(): Unit = {
-    cards.toString()
-  }
+
 }
