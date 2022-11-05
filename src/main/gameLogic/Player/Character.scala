@@ -4,7 +4,8 @@ import main.cardLogic.Card
 abstract class Character {
   var name = ""
   var balance: Int = 10000
-  var cards: List[Card] = List()
+  var publHand: List[Card] = List()
+  var privHand: List[Card] = List()
   var handRank: String = ""
 
   def changePrice(balance: Int): Unit = {
@@ -16,7 +17,8 @@ abstract class Character {
   }
 
   def clearCards(): Unit = {
-    cards = List()
+    publHand = List()
+    privHand = List()
   }
 
 
