@@ -30,6 +30,7 @@ object texasHoldEmTesting {
       println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
       i += 1
     }
+    println("")
     i = 1
     println(zac.name)
     for (c <- zac.privHand) {
@@ -37,6 +38,7 @@ object texasHoldEmTesting {
       i += 1
     }
     println(zac.handRank)
+    println("")
     i = 1
     println(ej.name)
     for (c <- ej.privHand) {
@@ -44,6 +46,7 @@ object texasHoldEmTesting {
       i += 1
     }
     println(ej.handRank)
+    println("")
     i = 1
     println(jeremy.name)
     for (c <- jeremy.privHand) {
@@ -51,6 +54,7 @@ object texasHoldEmTesting {
       i += 1
     }
     println(jeremy.handRank)
+    println("")
     i = 1
     println(journey.name)
     for (c <- journey.privHand) {
@@ -58,6 +62,7 @@ object texasHoldEmTesting {
       i += 1
     }
     println(journey.handRank)
+    println("")
   }
 
 
