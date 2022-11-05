@@ -2,7 +2,9 @@ package main.gameLogic
 
 import main.gameLogic.Player.Player
 
-class blackJack(initPlayers: Array[Player]) extends Game(initPlayers) {
+import scala.collection.mutable.ArrayBuffer
+
+class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     var PlayerToValue: Map[Player, Int] = Map()
 
     def valueCount(Entity :Player): Unit ={
