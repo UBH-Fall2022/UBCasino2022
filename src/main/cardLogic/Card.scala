@@ -6,14 +6,13 @@ class Card() {
   var cardValue: Int = 0
 
   def setSuit(givenSuit: String): Unit = {
-    val firstChar: String = givenSuit.charAt(0).toString
-    if (firstChar.contains("c") || firstChar.contains("C")) {
+    if (givenSuit == "C") {
       cardSuit = "Clubs"
-    } else if (firstChar.contains("h") || firstChar.contains("H")) {
+    } else if (givenSuit == "H") {
       cardSuit = "Hearts"
-    } else if (firstChar.contains("s") || firstChar.contains("S")) {
+    } else if (givenSuit == "S") {
       cardSuit = "Spades"
-    } else if (firstChar.contains("d") || firstChar.contains("D")) {
+    } else if (givenSuit == "D") {
       cardSuit = "Diamonds"
     } else {
       throw new IndexOutOfBoundsException("Card Suit out of bounds!")
