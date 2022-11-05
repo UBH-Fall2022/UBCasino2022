@@ -1,7 +1,9 @@
 package main.gameLogic
 import main.gameLogic.Player.Player
 
-class texasHoldem(initPlayers: Array[Player]) extends Game(initPlayers) {
+import scala.collection.mutable.ArrayBuffer
+
+class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   val gameType: String = "Texas Holdem"
   def deal(): Unit ={
     for(player <- players) {
