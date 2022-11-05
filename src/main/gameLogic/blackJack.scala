@@ -13,4 +13,5 @@ class blackJack(initPlayers: Array[Player]) extends Game(initPlayers) {
         }
       value
     }
+
 }
