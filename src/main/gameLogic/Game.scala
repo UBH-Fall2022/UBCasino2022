@@ -11,6 +11,7 @@ class Game(initPlayers: ArrayBuffer[Player]){
   var deck: Deck = new Deck
   deck.createDeck()
   var table: Array[Card] = Array()
+  val participate: Int = 30
 
   def addPlayer(player: Player): Boolean = {
     if(players.length >= 6){
@@ -22,8 +23,16 @@ class Game(initPlayers: ArrayBuffer[Player]){
     }
   }
 
+  def buyIn(): Unit = {
+    for(player <-  players){
+      player.balance = player.balance - 30
+      pot = pot + 30
+      player.in = true
+    }
+  }
   def fold(player: Player): Unit = {
     player.privHand = List()
+    player.in = false
     //need an attribute to determine if they're still in or not
   }
 
