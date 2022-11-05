@@ -1,4 +1,4 @@
-package tests
+package main.tests
 
 object blackJackTesting {
 

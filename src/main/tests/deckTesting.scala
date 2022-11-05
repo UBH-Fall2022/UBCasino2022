@@ -1,4 +1,4 @@
-package tests
+package main.tests
 
 import main.cardLogic.Deck
 
