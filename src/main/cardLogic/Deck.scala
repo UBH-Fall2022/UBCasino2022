@@ -5,7 +5,6 @@ import scala.util.Random
 
 class Deck() {
 
-
   var deckQueue: mutable.Queue[Card] = new mutable.Queue()
   var headOfDeck: Card = new Card
   val intDeck: List[String] = List("2","3","4","5","6","7","8","9","10","J","Q","K","A")
@@ -56,7 +55,19 @@ class Deck() {
 
   def printCard(): Unit = {
     for (ele <- deckQueue) {
-      println("Card: " + ele.cardValue + " of " + ele.cardSuit)
+      if (ele.cardValue < 11) {
+        println("Card: " + ele.cardValue + " of " + ele.cardSuit)
+      } else if (ele.cardValue == 11) {
+        println("Card: Jack of " + ele.cardSuit)
+      } else if (ele.cardValue == 12) {
+        println("Card: Queen of " + ele.cardSuit)
+      } else if (ele.cardValue == 13) {
+        println("Card: King of " + ele.cardSuit)
+      } else if (ele.cardValue == 14) {
+        println("Card: Ace of " + ele.cardSuit)
+      } else {
+        throw new IndexOutOfBoundsException("Card Value is invalid!")
+      }
     }
   }
 
