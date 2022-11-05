@@ -2,10 +2,11 @@ package main.gameLogic
 
 import main.gameLogic.Player.Player
 import main.cardLogic._
+import scala.collection.mutable.ArrayBuffer
 
-class Game(initPlayers: Array[Player]){
+class Game(initPlayers: ArrayBuffer[Player]){
   var pot: Int = 0
-  var players: Array[Player] = initPlayers
+  var players: ArrayBuffer[Player] = initPlayers
   val maxPlayers: Int = 6
   var deck: Deck = new Deck
   deck.createDeck()
@@ -21,19 +22,28 @@ class Game(initPlayers: Array[Player]){
     }
   }
 
+  def fold(player: Player): Unit = {
+    player.cards = List()
+    //need an attribute to determine if they're still in or not
+  }
+
   def removePlayer(player: Player): Boolean = {
     if(players.length <=2 ){
       //do something special to award pot to remaining player, end game
       false
     }
     else{
-      //find the index of this player and remove them
+      for(index <- players){
+        if(index == player){
+          players -= index
+        }
+      }
       true
     }
   }
 
-  def win(winner: Player, amount: Int): Unit ={
-    winner.balance += amount
+  def win(winner: Player): Unit ={
+    winner.balance += pot
     pot = 0
   }
 
