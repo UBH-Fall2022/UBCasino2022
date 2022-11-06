@@ -21,10 +21,7 @@ object texasHoldEmTesting {
     testGame.deal()
     testGame.addCards(5)
 
-    testGame.isPair()
-    testGame.twoPair()
-    testGame.checkTable()
-
+    testGame.calculateHands()
 
     var i: Int = 1
     println("Table: ")
