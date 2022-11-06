@@ -16,10 +16,14 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
     newGame.deal()
 
     println("your cards are")
-    myPlayer.displayCards()
+    myPlayer.displayBJ()
     println("")
 
-    println("Insurance or Surender")
+    println("Hit or Stay or Double Down")
+      val read = readLine()
+        if (read == "Hit"){
+          
+        }
 
   }
 
