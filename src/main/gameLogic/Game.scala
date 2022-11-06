@@ -25,8 +25,8 @@ class Game(initPlayers: ArrayBuffer[Player]){
 
   def buyIn(): Unit = {
     for(player <-  players){
-      player.balance = player.balance - 30
-      pot = pot + 30
+      player.balance = player.balance - participate
+      pot = pot + participate
       player.in = true
     }
   }
