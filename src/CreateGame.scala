@@ -42,11 +42,16 @@ object CreateGame {
         gamemode = new blackjackState(Players)
       }
     else if(game.toLowerCase() == "texas hold em"){
-      gamemode = new pokerState(Players)
+      val newGame: texasHoldem = new texasHoldem(Players)
+      
+      val myPlayer: Player = Players.head
+      
+      newGame.deal()
+      
+      println("Check, Bet, or Fold?")
     }
-
-    gamemode.run()
-
+    
+    
 
   }
   

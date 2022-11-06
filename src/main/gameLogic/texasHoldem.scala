@@ -10,8 +10,40 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   val gameType: String = "Texas Holdem"
   var tableHand: Int = 0
   var flushBy: String = "null"
-
-
+  var betting: Boolean = false
+  var currBet: Int = 0
+  
+  
+  def placeBet(player: Player, bet: Int): Unit = {
+    if (!betting) {
+      if (player.balance-bet <= 0) {
+        this.pot += player.balance
+        currBet = player.balance
+        player.balance = 0
+      } else {
+        currBet = bet
+        player.balance -= bet
+        this.pot += bet
+      }
+    } else {
+      if (player.balance-bet <= 0) {
+        this.pot += player.balance
+        player.balance = 0
+      }
+      if (bet > currBet) {
+        currBet = bet
+        player.balance -= bet
+        this.pot += bet
+      } else if (bet < currBet) {
+        player.balance -= currBet
+        this.pot += currBet
+      } else {
+        player.balance -= bet
+        this.pot += bet
+      }
+    }
+  }
+  
   def deal(): Unit = {
     for(player <- players) {
       player.privHand = player.privHand :+ deck.dealCard()
