@@ -151,7 +151,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       for (ele <- combinedSuits) {
         countList = countList :+ combinedSuits.count(x => {x == ele})
       }
-      println(countList)
+      //println(countList)
       if (countList.max >= 5) {
         player.handRank = handRankings(5)
       }
