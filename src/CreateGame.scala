@@ -33,32 +33,36 @@ object CreateGame {
         warped = "Done"
       }
     }
-    println("Pick a Game")
-    println("")
-    println("Enter 1 for Texas Hold Em")
-    println("")
-    println("Enter 2 for Blackjack")
-    println("")
-    println("Enter 3 for Slots")
-    println("")
-    var game = readLine()
-    var gamemode: State = new blackjackState(Players)
-    if (game.toInt == 2) {
-      gamemode = new blackjackState(Players)
-    }
-    else if (game.toInt == 1) {
-      gamemode = new pokerState(Players)
-    }
-    else if (game.toInt == 3) {
-      gamemode = new slotState(Players)
-    }
-    else {
-      println("Enter 1, 2 or 3")
-    }
+    var endGame: String= ""
+    while(endGame != "Done") {
+      println("Pick a Game")
+      println("")
+      println("Enter 1 for Texas Hold Em")
+      println("")
+      println("Enter 2 for Blackjack")
+      println("")
+      println("Enter 3 for Slots")
+      println("")
+      var game = readLine()
+      var gamemode: State = new blackjackState(Players)
+      if (game.toInt == 2) {
+        gamemode = new blackjackState(Players)
+      }
+      else if (game.toInt == 1) {
+        gamemode = new pokerState(Players)
+      }
+      else if (game.toInt == 3) {
+        gamemode = new slotState(Players)
+      }
+      else {
+        println("Enter 1, 2 or 3")
+      }
 
-    
 
-    gamemode.run()
+      gamemode.run()
+        print("Type Done if you are done \n If not press enter")
+      endGame = readLine()
+    }
 
 
   }

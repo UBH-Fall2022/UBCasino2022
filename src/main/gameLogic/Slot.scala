@@ -17,10 +17,10 @@ class Slot (player: Player){
 
     if(reelOne==reelTwo && reelTwo==reelThr){
       reelOne match {
-        case "5" => player.balance += 20*spinCost; win = 20*spinCost
-        case "4" => player.balance += 10*spinCost; win = 10*spinCost
-        case "3" => player.balance += 5*spinCost; win = 5*spinCost
-        case "2" => player.balance += spinCost; win = spinCost
+        case "5" => player.balance += 32*spinCost; win = 20*spinCost
+        case "4" => player.balance += 21*spinCost; win = 10*spinCost
+        case "3" => player.balance += 12*spinCost; win = 5*spinCost
+        case "2" => player.balance += 3*spinCost; win = spinCost
       }
     }
     win

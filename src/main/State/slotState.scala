@@ -20,7 +20,7 @@ class slotState(Players :ArrayBuffer[Player]) extends State {
           var after = player.balance
           var dif = before-after
           if(dif<0){
-            println("You Won " +dif.toString)
+            println("You Won " +Math.abs(dif).toString)
           }
           else if(dif>0){
             println("You Lost " +Math.abs(dif).toString)
@@ -42,7 +42,7 @@ class slotState(Players :ArrayBuffer[Player]) extends State {
         var after = player.balance
         var dif = before - after
         if (dif < 0) {
-          println("You Won " + dif.toString)
+          println("You Won " + Math.abs(dif).toString)
         }
         else if (dif > 0) {
           println("You Lost " + Math.abs(dif).toString)
@@ -62,7 +62,7 @@ class slotState(Players :ArrayBuffer[Player]) extends State {
         var after = player.balance
         var dif = before - after
         if (dif < 0) {
-          println("You Won " + dif.toString)
+          println("You Won " + Math.abs(dif).toString)
         }
         else if (dif > 0) {
           println("You Lost " + Math.abs(dif).toString)
