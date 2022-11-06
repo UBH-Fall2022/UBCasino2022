@@ -38,6 +38,7 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
       newGame.hit(myPlayer)
       if (!myPlayer.in) {
         println("BUST!")
+        myPlayer.clearCards()
         return 
       }
       println("Your Cards: ")
@@ -55,6 +56,7 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
       }
       if (!myPlayer.in) {
         println("Bust!")
+        myPlayer.clearCards()
         return
       }
     } else if (read == "Double Down") {
