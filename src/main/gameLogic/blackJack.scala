@@ -104,4 +104,11 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     }
   }
 
+  def doubleDown(player: Player): Unit = {
+    if(player.balance >= participate){
+      player.publHand :+ deck.dealCard()
+      player.balance -= participate
+    }
+  }
+
 }
