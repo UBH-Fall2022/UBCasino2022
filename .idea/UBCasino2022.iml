@@ -10,23 +10,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="18" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-sdk-2.13.8" level="application" />
-    <orderEntry type="library" name="openjfx-19_windows-x64_bin-sdk" level="project" />
-    <orderEntry type="library" name="scala-sdk-2.13.6" level="application" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac-aarch64:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac-aarch64:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac-aarch64:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac-aarch64:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:mac-aarch64:17.0.2-ea+1" level="project" />
-    <orderEntry type="library" name="Maven: org.scalafx:scalafx_2.13:15.0.1-R21" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.13.4" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-reflect:2.13.4" level="project" />
+    <orderEntry type="library" name="Maven: org.scalatest:scalatest_2.13:3.0.9" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.13.3" level="project" />
+    <orderEntry type="library" name="Maven: org.scalactic:scalactic_2.13:3.0.9" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-reflect:2.13.3" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang.modules:scala-xml_2.13:1.2.0" level="project" />
   </component>
 </module>

@@ -20,9 +20,7 @@ class Card() {
   }
 
   def setSign(givenValue: String): Unit = {
-    if (givenValue == "1") {
-      cardValue = 1
-    } else if (givenValue == "2") {
+    if (givenValue == "2") {
       cardValue = 2
     } else if (givenValue == "3") {
       cardValue = 3

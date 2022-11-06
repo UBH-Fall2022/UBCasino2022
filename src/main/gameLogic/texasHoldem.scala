@@ -137,6 +137,26 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     }
   }
 
+  def isTrio(): Unit = {
+    for (player <- players) {
+      if (player.handRank == handRankings(9)) {
+        val firstCard: Card = player.privHand.head
+        val secondCard: Card = player.privHand(1)
+        var combinedCards: List[Int] = List()
+        for (c <- table) {
+          combinedCards = combinedCards :+ c.cardValue
+        }
+        val firstCardCount: Int = combinedCards.count(x => {x == firstCard.cardValue})
+        val secondCardCount: Int = combinedCards.count(x => {x == secondCard.cardValue})
+        if (firstCard.cardValue == secondCard.cardValue) {
+          if (firstCardCount == 1 && secondCardCount == 1) {
+            player.handRank = handRankings(7)
+          }
+        }
+      }
+    }
+  }
+
   def isFlush(): Unit = {
     for (player <- players) {
       val firstSuit: String = player.privHand.head.cardSuit
@@ -151,9 +171,73 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       for (ele <- combinedSuits) {
         countList = countList :+ combinedSuits.count(x => {x == ele})
       }
-      println(countList)
+      //println(countList)
       if (countList.max >= 5) {
         player.handRank = handRankings(5)
+      }
+    }
+  }
+
+  def isFullHouse(): Unit = {
+    for (player <- players) {
+      val firstCard: Int = player.privHand.head.cardValue
+      val secondCard: Int = player.privHand(1).cardValue
+      if (firstCard == secondCard) {
+        var tableList: List[Int] = List()
+        for (ele <- table) {
+          tableList = tableList :+ ele.cardValue
+        }
+        val firstCount: Int = tableList.count(x => {x == firstCard})
+        val secondCount: Int = tableList.count(x => {x == secondCard})
+        val totalCount: Int = firstCount + secondCount
+        if (tableHand == 3 && totalCount == 0) {
+          player.handRank = handRankings(4)
+        }
+      }
+      var tableList: List[Int] = List()
+      for (ele <- table) {
+        tableList = tableList :+ ele.cardValue
+      }
+      val firstCount: Int = tableList.count(x => {x == firstCard})
+      val secondCount: Int = tableList.count(x => {x == secondCard})
+      if (player.handRank == handRankings(9)) {
+        if (firstCount == 1 || secondCount == 1) {
+          if (tableHand == 3) {
+            player.handRank = handRankings(4)
+          }
+        }
+      }
+      if (player.handRank == handRankings(7)) {
+        if (tableHand == 8) {
+          player.handRank = handRankings(4)
+        }
+      }
+    }
+  }
+
+  def isRoyalFlush(): Unit = {
+    for (player <- players) {
+      if (player.handRank == handRankings(5)) {
+        var inputHand: List[Int] = List(
+          player.privHand.head.cardValue,
+          player.privHand(1).cardValue,
+          table.head.cardValue,
+          table(1).cardValue,
+          table(2).cardValue,
+          table(3).cardValue,
+          table(4).cardValue
+        )
+        inputHand = inputHand.sorted
+        val expectedHand: List[Int] = List(
+          10,
+          11,
+          12,
+          13,
+          14
+        )
+        if (inputHand.contains(expectedHand)) {
+          player.handRank = handRankings(1)
+        }
       }
     }
   }
@@ -185,7 +269,10 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     checkTable()
     isPair()
     twoPair()
+    isTrio()
     isFlush()
+    isFullHouse()
+    isRoyalFlush()
   }
 
 }
