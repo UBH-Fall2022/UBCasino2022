@@ -11,17 +11,16 @@
 
       <center><h1>Welcome to the UBCasino</h1> </center>
         <center><h2>Enter the Players Below</h2></center>
-        <center><input type="text"></center>
-        <center> <button> Enter </button></center>
-        <center><table>
+        <center><input type="text" id="inputId"></center>
+        <center> <button type= 'button' onclick="getInputValue()"> Enter </button>
+        </center>
+        <center>
+            <table id = "testBody">
             <tr>
-                <th>Player 1,</th>
-                <th>Player 2,</th>
-                <th>Player 3,</th>
-                <th>Player 4,</th>
-                <th>Player 5</th>
+                <tb ></tb>
             </tr>
         </table>
+
         </center>
         <center><h2>Select The Game You Want To Play</h2></center>
        <center>
@@ -34,6 +33,29 @@
 
 
 </body>
+<script>
+    let items1 = new Array(6);
+    function getInputValue() {
+        items1 =[]
+        word = document.getElementById("inputId").value;
+        items1.push(word)
+
+
+        function loadTableData(item) {
+            const table = document.getElementById("testBody");
+            for (items of item) {
+                let row = table.insertRow();
+                let name = row.insertCell(0);
+                name.innerHTML = items;
+            }
+
+        }
+
+        loadTableData(items1);
+    }
+</script>
+
+
 <style>
     .background-image{
         background-image: url('/CasinoImages/Wallpaper.jpg');
