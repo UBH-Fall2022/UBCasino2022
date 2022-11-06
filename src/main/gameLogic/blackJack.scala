@@ -5,10 +5,10 @@ import main.gameLogic.Player._
 import scala.collection.mutable._
 
 class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
-  var PlayerToValue: Map[Player, Int] = Map()
+  var PlayerToValue: Map[Character, Int] = Map()
   val dealer: Dealer = new Dealer
 
-  def valueCount(player: Player): Int ={
+  def valueCount(player: Character): Int ={
     var ret: Int = 0
     var aces: Int = 0
     for(card <- player.publHand){
@@ -58,9 +58,9 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     }
   }
 
-  def winners: List[Player] = {
-    var bestHand = 0
-    var winners: List[Player] = List[Player]()
+  def winners: List[Character] = {
+    var top = 0
+    var winners: List[Character] = List[Character]()
     if(valueCount(dealer) > 21){
       for((player, hand) <- PlayerToValue){
         if(hand<=21){
@@ -71,7 +71,7 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     else{
       for((player, hand) <- PlayerToValue){
         if(hand<=21 && hand>top){
-          winners = List[Player](player)
+          winners = List[Character](player)
           top = hand
         }
         else if(hand == top){
