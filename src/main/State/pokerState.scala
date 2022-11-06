@@ -270,7 +270,8 @@ class pokerState(var Players :ArrayBuffer[Player]) extends State {
     println("")
     println("Your balance: " + myPlayer.balance)
     println("")
-      }
+    myPlayer.clearCards()
+  }
   
   
 

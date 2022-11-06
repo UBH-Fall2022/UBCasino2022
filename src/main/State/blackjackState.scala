@@ -81,6 +81,7 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
     
     println("Your New Balance: ")
     println(myPlayer.balance)
+    myPlayer.clearCards()
 
   }
 
