@@ -302,7 +302,7 @@ object CreateGame {
         }
       }
       println("Winning Hand: " + winnerPlayer.handRank)
-      println(winnerPlayer.displayCards())
+      winnerPlayer.displayCards()
       println("")
       println("Your balance: " + myPlayer.balance)
 
