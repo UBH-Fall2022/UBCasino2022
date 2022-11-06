@@ -16,12 +16,22 @@
     <dependencies>
 
 
-        <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest -->
+
+        <!-- https://mvnrepository.com/artifact/org.scalafx/scalafx -->
         <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.13</artifactId>
-            <version>3.0.9</version>
+            <groupId>org.scalafx</groupId>
+            <artifactId>scalafx_3</artifactId>
+            <version>19.0.0-R30</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>19</version>
+            <type>pom</type>
+        </dependency>
+
+
     </dependencies>
 
 </project>
