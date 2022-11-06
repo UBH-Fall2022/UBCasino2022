@@ -11,7 +11,7 @@ class slotState(Players :ArrayBuffer[Player]) extends State {
      var player = Players(0)
     var slot = new Slot(player)
     while(player.balance >0){
-      println("type spin then enter to spin \n type spin2 then enter to spin 10 times \n type spin3 then enter to spin 100 times ")
+      println("type Spin then enter to spin \n type Spin10 then enter to spin 10 times \n type Spin100 then enter to spin 100 times ")
       var action = readLine()
       if(action.toLowerCase() == "spin")
         {
@@ -35,7 +35,7 @@ class slotState(Players :ArrayBuffer[Player]) extends State {
             }
           println("Your Balance is " + player.balance)
         }
-      if (action.toLowerCase() == "spin2") {
+      if (action.toLowerCase() == "spin10") {
         var before = player.balance
         for(i <- 1 to 10)
         slot.spinSlot()
@@ -55,7 +55,7 @@ class slotState(Players :ArrayBuffer[Player]) extends State {
         }
         println("Your Balance is " + player.balance)
       }
-      if (action.toLowerCase() == "spin3") {
+      if (action.toLowerCase() == "spin100") {
         var before = player.balance
         for (i <- 1 to 100)
           slot.spinSlot()
