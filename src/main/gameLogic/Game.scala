@@ -32,6 +32,7 @@ class Game(initPlayers: ArrayBuffer[Player]){
   }
   def fold(player: Player): Unit = {
     player.privHand = List()
+    player.publHand = List()
     player.in = false
     //need an attribute to determine if they're still in or not
   }
