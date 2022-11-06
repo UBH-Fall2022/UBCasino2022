@@ -23,7 +23,7 @@ object texasHoldEmTesting {
 
     testGame.isPair()
     testGame.twoPair()
-    testGame.isTrio()
+    testGame.checkTable()
 
 
     var i: Int = 1
