@@ -451,6 +451,14 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
             return winnerConcat
           }
         }
+        if (player.winnerWeight == 10 || player.winnerWeight == 7) {
+          if (playerMax > winnerMax) {
+            winner = player
+          } else if (playerMax == winnerMax) {
+            val winnerConcat: String = winner.name + ", " + player.name
+            return winnerConcat
+          }
+        }
       }
     }
     gameWinner = winner.name
