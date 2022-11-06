@@ -12,6 +12,7 @@ class Game(initPlayers: ArrayBuffer[Player]){
   deck.createDeck()
   var table: Array[Card] = Array()
   val participate: Int = 30
+  var gameWinner: String = ""
 
   def addPlayer(player: Player): Boolean = {
     if(players.length >= 6){

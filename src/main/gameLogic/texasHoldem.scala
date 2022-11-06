@@ -453,6 +453,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
         }
       }
     }
+    gameWinner = winner.name
     winner.name
   }
 
