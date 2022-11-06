@@ -76,11 +76,29 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       val secondCard: Card = player.privHand(1)
       if (firstCard.cardValue == secondCard.cardValue) {
         player.handRank = handRankings(9)
+        var tableList: List[Int] = List()
+        for (ele <- table) {
+          tableList = tableList :+ ele.cardValue
+        }
+        val firstCount: Int = tableList.count(x => {x == firstCard.cardValue})
+        val secondCount: Int = tableList.count(x => {x == secondCard.cardValue})
+        if (firstCount == 2 || secondCount == 2) {
+          player.handRank = handRankings(3)
+        }
       } else {
         for (c <- table) {
           if (firstCard.cardValue == c.cardValue || secondCard.cardValue == c.cardValue) {
             player.handRank = handRankings(9)
           }
+        }
+        var tableList: List[Int] = List()
+        for (ele <- table) {
+          tableList = tableList :+ ele.cardValue
+        }
+        val firstCount: Int = tableList.count(x => {x == firstCard.cardValue})
+        val secondCount: Int = tableList.count(x => {x == secondCard.cardValue})
+        if (firstCount == 3 || secondCount == 3) {
+          player.handRank = handRankings(3)
         }
       }
     }
