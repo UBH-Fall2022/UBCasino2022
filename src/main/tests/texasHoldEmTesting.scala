@@ -163,10 +163,13 @@ object texasHoldEmTesting extends FunSuite {
     println(journey.handRank)
     println("")
 
+    println("Winner: " + testGame.computeWinner())
+
   }
 
   def main(args: Array[String]): Unit = {
-    royalflush()
+    gameTest()
+    //royalflush()
   }
 
 
