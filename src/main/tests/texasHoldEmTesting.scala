@@ -3,10 +3,9 @@ package main.tests
 import main.cardLogic.Card
 import main.gameLogic.Player.Player
 import main.gameLogic.texasHoldem
-import org.scalatest.FunSuite
 import scala.collection.mutable.ArrayBuffer
 
-object texasHoldEmTesting extends FunSuite {
+object texasHoldEmTesting {
 
   def royalflush(): Unit = {
     val ej: Player = new Player("ej")
