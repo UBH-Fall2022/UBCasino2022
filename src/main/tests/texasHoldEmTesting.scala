@@ -43,68 +43,74 @@ object texasHoldEmTesting {
     fourTestGame.table = fourTestGame.table :+ JackofHearts
     fourTestGame.table = fourTestGame.table :+ TenofHearts
 
+    for(card <- fourTestGame.table){
+      println(card.cardSuit +" of "+card.cardValue)
+    }
+    println(ej.privHand(0).cardSuit +" of "+ ej.privHand(0).cardValue +" and "+ej.privHand(1).cardSuit + " of "+ej.privHand(1).cardValue)
     fourTestGame.calculateHands()
 
+    println(ej.handRank)
+    println("")
 
     println("Winner: " + fourTestGame.computeWinner())
 
   }
 
-  def fourOfKind(): Unit = {
-
-    val journey: Player = new Player("Journey")
-
-    val fourOfHearts: Card = new Card()
-    fourOfHearts.setSuit("H")
-    fourOfHearts.setSign("4")
-
-    val fourOfSpades: Card = new Card()
-    fourOfSpades.setSuit("S")
-    fourOfSpades.setSign("4")
-
-    val fourOfDiamonds: Card = new Card()
-    fourOfDiamonds.setSuit("D")
-    fourOfDiamonds.setSign("4")
-
-    val fourOfClubs: Card = new Card()
-    fourOfClubs.setSuit("C")
-    fourOfClubs.setSign("4")
-
-    val aceOfSpades: Card = new Card()
-    aceOfSpades.setSuit("S")
-    aceOfSpades.setSign("A")
-
-    journey.privHand = journey.privHand :+ aceOfSpades
-    journey.privHand = journey.privHand :+ fourOfClubs
-
-    val gamePlayers: ArrayBuffer[Player] = ArrayBuffer(journey)
-
-    val fourTestGame: texasHoldem = new texasHoldem(gamePlayers)
-
-    fourTestGame.addCards(2)
-
-    fourTestGame.table = fourTestGame.table :+ fourOfHearts
-    fourTestGame.table = fourTestGame.table :+ fourOfDiamonds
-    fourTestGame.table = fourTestGame.table :+ fourOfSpades
-
-    fourTestGame.calculateHands()
-
-    var i: Int = 1
-    println("Table: ")
-    for (c <- fourTestGame.table) {
-      println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
-      i += 1
-    }
-    println("")
-    println(journey.name)
-    for (c <- journey.privHand) {
-      println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
-      i += 1
-    }
-    println(journey.handRank)
-    println("")
-
-  }
+//  def fourOfKind(): Unit = {
+//
+//    val journey: Player = new Player("Journey")
+//
+//    val fourOfHearts: Card = new Card()
+//    fourOfHearts.setSuit("H")
+//    fourOfHearts.setSign("4")
+//
+//    val fourOfSpades: Card = new Card()
+//    fourOfSpades.setSuit("S")
+//    fourOfSpades.setSign("4")
+//
+//    val fourOfDiamonds: Card = new Card()
+//    fourOfDiamonds.setSuit("D")
+//    fourOfDiamonds.setSign("4")
+//
+//    val fourOfClubs: Card = new Card()
+//    fourOfClubs.setSuit("C")
+//    fourOfClubs.setSign("4")
+//
+//    val aceOfSpades: Card = new Card()
+//    aceOfSpades.setSuit("S")
+//    aceOfSpades.setSign("A")
+//
+//    journey.privHand = journey.privHand :+ aceOfSpades
+//    journey.privHand = journey.privHand :+ fourOfClubs
+//
+//    val gamePlayers: ArrayBuffer[Player] = ArrayBuffer(journey)
+//
+//    val fourTestGame: texasHoldem = new texasHoldem(gamePlayers)
+//
+//    fourTestGame.addCards(2)
+//
+//    fourTestGame.table = fourTestGame.table :+ fourOfHearts
+//    fourTestGame.table = fourTestGame.table :+ fourOfDiamonds
+//    fourTestGame.table = fourTestGame.table :+ fourOfSpades
+//
+//    fourTestGame.calculateHands()
+//
+//    var i: Int = 1
+//    println("Table: ")
+//    for (c <- fourTestGame.table) {
+//      println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
+//      i += 1
+//    }
+//    println("")
+//    println(journey.name)
+//    for (c <- journey.privHand) {
+//      println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
+//      i += 1
+//    }
+//    println(journey.handRank)
+//    println("")
+//
+//  }
 
   def gameTest(): Unit = {
 
@@ -167,8 +173,8 @@ object texasHoldEmTesting {
   }
 
   def main(args: Array[String]): Unit = {
-    gameTest()
-    //royalflush()
+    //gameTest()
+    royalflush()
   }
 
 
