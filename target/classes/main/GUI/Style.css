@@ -1,6 +1,9 @@
 *{
 background: cyan;
+background-image: image("Wallpaper.jpg");
+
 }
+
 
 button {
     padding: 1rem 3rem;
@@ -14,3 +17,7 @@ button {
 button:hover{
     background: white;
 }
+
+
+
+
