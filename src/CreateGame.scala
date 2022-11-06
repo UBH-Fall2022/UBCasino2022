@@ -17,7 +17,7 @@ object CreateGame {
     println("---------------------------------")
     println("Write A Name To Add A Player Max Players is 6 \n \n \n")
     println("---------------------------------")
-    while (warped != "done") {
+    while (warped != "Done") {
       println("Enter Player Name or Enter Done to Continue: ")
       println("")
       warped = readLine()
