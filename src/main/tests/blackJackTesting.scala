@@ -2,11 +2,12 @@ package main.tests
 
 import main.gameLogic.Player._
 import main.gameLogic.blackJack
+import org.scalatest.FunSuite
 
 import scala.collection.mutable.ArrayBuffer
 
-object blackJackTesting {
-  def main(args: Array[String]): Unit = {
+class blackJackTesting extends FunSuite {
+  test("Testing everything :)"){
     val Jeremy: Player = new Player("Jeremy")
     val Zac: Player = new Player("Zac")
     val Journey: Player = new Player("Journey")
@@ -17,6 +18,21 @@ object blackJackTesting {
 
     testGame.deal()
 
-    print("Private hand: "+testGame.dealer.privHand.head.cardValue+"\n Public Hand: "+testGame.dealer.publHand.head.cardValue)
+    assert(testGame.dealer.privHand.nonEmpty)
+    assert(testGame.dealer.publHand.nonEmpty)
+
+    assert(testGame.dealer.privHand.length == 1)
+    assert(testGame.dealer.publHand.length == 1)
+
+    for(player <- testGame.players){
+      assert(player.publHand.length == 2)
+      assert(player.publHand.nonEmpty)
+    }
+
+    testGame.playerMap()
+    val winners = testGame.winners()
+
+    assert(winners.nonEmpty)
   }
 }
+
