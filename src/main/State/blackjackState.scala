@@ -3,7 +3,6 @@ package main.State
 import main.gameLogic.Player.Player
 import main.gameLogic.blackJack
 import scala.collection.mutable.ArrayBuffer
-import scala.io.StdIn.readLine
 
 class blackjackState(var Players :ArrayBuffer[Player]) extends State {
   override def run(): Unit = {
@@ -21,9 +20,9 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
     println("")
 
     println("Hit or Stay or Double Down")
-      var read = readLine()
+        val read = readLine()
         if (read == "Hit"){
-          
+
         }
 
   }
