@@ -36,6 +36,22 @@
             <artifactId>scalatest_2.13</artifactId>
             <version>3.0.9</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.corundumstudio.socketio/netty-socketio -->
+        <dependency>
+            <groupId>com.corundumstudio.socketio</groupId>
+            <artifactId>netty-socketio</artifactId>
+            <version>1.7.17</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.exoego/scala-js-nodejs-v10 -->
+        <dependency>
+            <groupId>net.exoego</groupId>
+            <artifactId>scala-js-nodejs-v10_sjs1_2.13</artifactId>
+            <version>0.14.0</version>
+        </dependency>
+
+
+
+
 
 
     </dependencies>
