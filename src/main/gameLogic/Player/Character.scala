@@ -12,7 +12,7 @@ abstract class Character {
   var pairBy: Int = 0
   var twoPairBy1: Int = 0
   var twoPairBy2: Int = 0
-  var in: Boolean = false
+  var in: Boolean = true
   
   def displayBJ(): Unit = {
     for (ele <- privHand) {

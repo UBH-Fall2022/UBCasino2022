@@ -36,10 +36,14 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
     var read = readLine()
     if (read == "Hit"){
       newGame.hit(myPlayer)
+      if (!myPlayer.in) {
+        println("BUST!")
+        return 
+      }
       println("Your Cards: ")
       myPlayer.displayBJ()
       println("")
-      while (read != "Stay") {
+      while (read != "Stay" && myPlayer.in) {
         println("Hit or Stay?")
         read = readLine()
         if (read == "Hit") {
@@ -48,6 +52,10 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
           myPlayer.displayBJ()
           println("")
         }
+      }
+      if (!myPlayer.in) {
+        println("Bust!")
+        return
       }
     } else if (read == "Double Down") {
       newGame.doubleDown(myPlayer)

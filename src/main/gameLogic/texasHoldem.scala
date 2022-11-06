@@ -395,6 +395,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   }
 
   def computeWinner(): String = {
+    calculateHands()
     var winner: Player = new Player("null")
     var winReturn: String = winner.name
     val winnerMap: Map[String, Int] = Map(

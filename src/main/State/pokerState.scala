@@ -108,6 +108,7 @@ class pokerState(var Players :ArrayBuffer[Player]) extends State {
     }
 
     println("Current Pot: " + newGame.pot)
+    println("")
 
     inCounter = 0
 
@@ -171,6 +172,7 @@ class pokerState(var Players :ArrayBuffer[Player]) extends State {
     }
 
     println("Current Pot: " + newGame.pot)
+    println("")
 
     inCounter = 0
 
@@ -234,6 +236,7 @@ class pokerState(var Players :ArrayBuffer[Player]) extends State {
     }
 
     println("Current Pot: " + newGame.pot)
+    println("")
 
     inCounter = 0
 
@@ -266,6 +269,7 @@ class pokerState(var Players :ArrayBuffer[Player]) extends State {
     winnerPlayer.displayCards()
     println("")
     println("Your balance: " + myPlayer.balance)
+    println("")
       }
   
   
