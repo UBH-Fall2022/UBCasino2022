@@ -9,6 +9,9 @@ abstract class Character {
   var handRank: String = "High Card"
   var winnerWeight: Int = 0
   var straightBy: Int = 0
+  var pairBy: Int = 0
+  var twoPairBy1: Int = 0
+  var twoPairBy2: Int = 0
   var in: Boolean = false
   
   def displayCards(): Unit = {

@@ -108,6 +108,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       val firstCard: Card = player.privHand.head
       val secondCard: Card = player.privHand(1)
       if (firstCard.cardValue == secondCard.cardValue) {
+        player.pairBy = firstCard.cardValue
         player.handRank = handRankings(9)
         var tableList: List[Int] = List()
         for (ele <- table) {
@@ -121,6 +122,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       } else {
         for (c <- table) {
           if (firstCard.cardValue == c.cardValue || secondCard.cardValue == c.cardValue) {
+            player.pairBy = c.cardValue
             player.handRank = handRankings(9)
           }
         }
@@ -150,19 +152,24 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
         val secondCardCount: Int = combinedCards.count(x => {x == secondCard.cardValue})
         if (firstCard.cardValue != secondCard.cardValue) {
           if (firstCardCount == 1 && secondCardCount == 1) {
+            player.twoPairBy1 = firstCard.cardValue
+            player.twoPairBy2 = secondCard.cardValue
             player.handRank = handRankings(8)
           } else if (firstCardCount == 2 || secondCardCount == 2) {
             player.handRank = handRankings(7)
           } else if (firstCardCount == 3 || secondCardCount == 3) {
             player.handRank = handRankings(3)
           } else if (firstCardCount == 1 && tableHand == 2) {
+            player.twoPairBy1 = firstCard.cardValue
             player.handRank = handRankings(8)
           } else if (secondCardCount == 1 && tableHand == 2) {
+            player.twoPairBy1 = secondCard.cardValue
             player.handRank = handRankings(8)
           }
         }
         if (firstCardCount != 1 && secondCardCount != 1) {
           if (firstCard.cardValue == secondCard.cardValue && tableHand == 2) {
+            player.twoPairBy1 = firstCard.cardValue
             player.handRank = handRankings(8)
           }
         }
@@ -389,6 +396,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
 
   def computeWinner(): String = {
     var winner: Player = new Player("null")
+    var winReturn: String = winner.name
     val winnerMap: Map[String, Int] = Map(
       "Royal Flush" -> 10,
       "Straight Flush" -> 9,
@@ -408,6 +416,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     for (player <- players) {
       if (player.winnerWeight > winner.winnerWeight) {
         winner = player
+        winReturn = winner.name
       } else if (player.winnerWeight == winner.winnerWeight) {
         val playerCardValues: List[Int] = List(player.privHand.head.cardValue, player.privHand(1).cardValue)
         val winnerCardValues: List[Int] = List(winner.privHand.head.cardValue, winner.privHand(1).cardValue)
@@ -432,37 +441,90 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
           }
           if (maxPlayerSuit > maxWinnerSuit) {
             winner = player
+            winReturn = winner.name
           }
         } else if (player.winnerWeight == 5 || player.winnerWeight == 9) {
           if (player.straightBy > winner.straightBy) {
             winner = player
-          } else if (player.straightBy == winner.straightBy) {
+            winReturn = winner.name
+          } else if (player.straightBy == winner.straightBy && winner.name != player.name) {
             val winnerConcat: String = winner.name + ", " + player.name
-            return winnerConcat
+            winReturn = winnerConcat
           }
         }
         if (playerMax > winnerMax) {
           winner = player
+          winReturn = winner.name
         } else if (playerMax == winnerMax) {
           if (playerCardValues.sum > winnerCardValues.sum) {
             winner = player
-          } else if (playerCardValues.sum == winnerCardValues.sum) {
+            winReturn = winner.name
+          } else if (playerCardValues.sum == winnerCardValues.sum && winner.name != player.name) {
             val winnerConcat: String = winner.name + ", " + player.name
-            return winnerConcat
+            winReturn = winnerConcat
           }
         }
-        if (player.winnerWeight == 10 || player.winnerWeight == 7) {
+        if (player.winnerWeight == 1 || player.winnerWeight == 7) {
           if (playerMax > winnerMax) {
             winner = player
-          } else if (playerMax == winnerMax) {
+            winReturn = winner.name
+          } else if (playerMax == winnerMax && winner.name != player.name) {
             val winnerConcat: String = winner.name + ", " + player.name
-            return winnerConcat
+            winReturn = winnerConcat
+          }
+        } else if (player.winnerWeight == 2) {
+          if ((player.privHand.head.cardValue == player.pairBy || player.privHand(1).cardValue == player.pairBy) &&
+            (winner.privHand.head.cardValue == winner.pairBy || winner.privHand(1).cardValue == winner.pairBy)) {
+            if (player.pairBy > winner.pairBy) {
+              winner = player
+              winReturn = winner.name
+            } else if (player.pairBy == winner.pairBy && winner.name != player.name) {
+              if (playerCardValues.sum > winnerCardValues.sum) {
+                winner = player
+                winReturn = winner.name
+              } else if (playerCardValues.sum == winnerCardValues.sum && winner.name != player.name) {
+                val winnerConcat: String = winner.name + ", " + player.name
+                winReturn = winnerConcat
+              }
+            }
+          } else {
+            if (playerMax > winnerMax) {
+              winner = player
+              winReturn = winner.name
+            } else if (playerMax == winnerMax) {
+              val winnerConcat: String = winner.name + ", " + player.name
+              winReturn = winnerConcat
+            }
+          }
+        }
+        if (player.winnerWeight == 3) {
+          val playerValList: List[Int] = List(
+            player.twoPairBy1,
+            player.twoPairBy2
+          )
+          val winnerValList: List[Int] = List(
+            winner.twoPairBy1,
+            winner.twoPairBy2
+          )
+          val playValMax: Int = playerValList.max
+          val winValMax: Int = winnerValList.max
+          if (playValMax > winValMax) {
+            winner = player
+            winReturn = winner.name
+          } else if (playValMax == winValMax) {
+            if (playerMax > winnerMax) {
+              winner = player
+              winReturn = winner.name
+            } else if(playerMax == winnerMax) {
+              val winnerConcat: String = winner.name + ", " + player.name
+              winReturn = winnerConcat
+            }
           }
         }
       }
     }
     gameWinner = winner.name
-    winner.name
+    winReturn
   }
 
 }
