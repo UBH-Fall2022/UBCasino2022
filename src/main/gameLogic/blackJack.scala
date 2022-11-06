@@ -93,8 +93,13 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     dealer.publHand :+deck.dealCard()
   }
 
-  def hit(player: Player): Unit = {
-    player.privHand :+ deck.dealCard()
+  def hit(player: Character): Unit = {
+    if(player.in){
+      player.privHand :+ deck.dealCard()
+    }
+    if(valueCount(player) > 21){
+      player.in = false
+    }
   }
 
 }
