@@ -17,6 +17,26 @@ object blackJackTesting {
 
     testGame.deal()
 
-    print("Private hand: "+testGame.dealer.privHand.head.cardValue+"\n Public Hand: "+testGame.dealer.publHand.head.cardValue)
+    println("Dealer Private hand: "+testGame.dealer.privHand.head.cardValue+" of "+testGame.dealer.privHand.head.cardSuit+
+      "\nDealer Public Hand: "+testGame.dealer.publHand.head.cardValue+" of "+testGame.dealer.publHand.head.cardSuit)
+
+    println(testGame.players(0).name+" has "+testGame.players(0).publHand(0).cardValue+" of "+testGame.players(0).publHand(0).cardSuit+
+      " and "+testGame.players(0).publHand(1).cardValue+" of "+testGame.players(0).publHand(1).cardSuit)
+    println("Totaling to "+testGame.valueCount(testGame.players(0))+"/21")
+
+    //println("Dealer has: "+testGame.valueCount(testGame.dealer))
+    //println(testGame.players(0).name+" has "+testGame.valueCount(testGame.players(0)))
+    //println(testGame.players(1).name+" has "+testGame.valueCount(testGame.players(1)))
+    //println(testGame.players(2).name+" has "+testGame.valueCount(testGame.players(2)))
+
+    testGame.playerMap()
+    for((player, hand) <- testGame.PlayerToValue){
+      println(player.name +" has "+hand)
+    }
+    val wins: List[Character] = testGame.winners()
+    print("Winner(s): ")
+    for(winner <- wins){
+      print(winner.name+" ")
+    }
   }
 }

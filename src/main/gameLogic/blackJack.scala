@@ -12,33 +12,37 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     var ret: Int = 0
     var aces: Int = 0
     for(card <- player.publHand){
-      if(card.cardValue > 10 && card.cardValue < 14){
-        ret +=10
+      if(card.cardValue >= 10 && card.cardValue < 14){
+        ret = ret+10
       }
       else if(card.cardValue==14){
-        aces+=1
+        aces += 1
       }
       else{
-        ret += card.cardValue
+        ret = ret + card.cardValue
       }
-      if(ret > 10 && ret < 21 && aces >= 1){
-        ret += 11
-        ret += (aces-1)*1
+
+      if(ret <= 10 && aces >= 1){
+        ret = ret + 11
+        aces-=1
+        ret = ret + aces
       }
       else{
         ret+=aces
       }
     }
-    val priv: Int = player.privHand.head.cardValue
-    if(priv < 14){
-      ret += Math.min(priv, 10)
-    }
-    else{
-      if(ret > 10){
-        ret+=1
+    if(!player.privHand.isEmpty){
+      val priv: Int = player.privHand.head.cardValue
+      if(priv < 14){
+        ret += Math.min(priv, 10)
       }
       else{
-        ret+=11
+        if(ret > 10){
+          ret+=1
+        }
+        else{
+          ret+=11
+        }
       }
     }
     ret
@@ -46,9 +50,9 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
 
   def playerMap(): Unit = {
     for(player <- players){
-      PlayerToValue(player) = valueCount(player)
+      PlayerToValue = PlayerToValue + (player -> valueCount(player))
     }
-    PlayerToValue(dealer) = valueCount(dealer)
+     PlayerToValue = PlayerToValue + ((dealer) -> valueCount(dealer))
   }
 
   def giveWinnings(winners: List[Player]): Unit ={
@@ -58,7 +62,7 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     }
   }
 
-  def winners: List[Character] = {
+  def winners(): List[Character] = {
     var top = 0
     var winners: List[Character] = List[Character]()
     if(valueCount(dealer) > 21){
@@ -83,14 +87,12 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   }
 
   def deal(): Unit = {
-    dealer.privHand :+deck.dealCard()
+    dealer.privHand = dealer.privHand :+ deck.dealCard()
     for(player <- players){
-      if(player.in){
-        player.publHand :+ deck.dealCard()
-        player.publHand :+ deck.dealCard()
-      }
+      player.publHand = player.publHand :+ deck.dealCard()
+      player.publHand = player.publHand :+ deck.dealCard()
     }
-    dealer.publHand :+deck.dealCard()
+    dealer.publHand = dealer.publHand :+deck.dealCard()
   }
 
   def hit(player: Character): Unit = {
