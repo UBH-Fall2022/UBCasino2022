@@ -52,7 +52,7 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     for(player <- players){
       PlayerToValue = PlayerToValue + (player -> valueCount(player))
     }
-     PlayerToValue = PlayerToValue + ((dealer) -> valueCount(dealer))
+    PlayerToValue = PlayerToValue + ((dealer) -> valueCount(dealer))
   }
 
   def giveWinnings(winners: List[Player]): Unit ={
