@@ -9,6 +9,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
 
   val gameType: String = "Texas Holdem"
   var tableHand: Int = 0
+  var flushBy: String = "null"
 
 
   def deal(): Unit = {
@@ -168,9 +169,17 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       combinedSuits = combinedSuits :+ firstSuit
       combinedSuits = combinedSuits :+ secondSuit
       var countList: List[Int] = List()
+      var suitFreq: Map[Int, String] = Map()
       for (ele <- combinedSuits) {
+        suitFreq += (combinedSuits.count(x => {x == ele}) -> ele)
         countList = countList :+ combinedSuits.count(x => {x == ele})
       }
+      var suitFreqList: List[Int] = List()
+      for (ele <- suitFreq.keys) {
+        suitFreqList = suitFreqList :+ ele
+      }
+      val suitMax: String = suitFreq(suitFreqList.max)
+      flushBy = suitMax
       //println(countList)
       if (countList.max >= 5) {
         player.handRank = handRankings(5)
@@ -301,6 +310,27 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
         val winnerCardValues: List[Int] = List(winner.privHand.head.cardValue, winner.privHand(1).cardValue)
         val winnerMax = winnerCardValues.max
         val playerMax = playerCardValues.max
+        if (player.winnerWeight == 6) {
+          var maxWinnerSuit: Int  = 0
+          var maxPlayerSuit: Int = 0
+          for (ele <- winner.privHand) {
+            if (ele.cardSuit == flushBy) {
+              if (ele.cardValue > maxWinnerSuit) {
+                maxWinnerSuit = ele.cardValue
+              }
+            }
+          }
+          for (ele <- player.privHand) {
+            if (ele.cardSuit == flushBy) {
+              if (ele.cardValue > maxPlayerSuit) {
+                maxPlayerSuit = ele.cardValue
+              }
+            }
+          }
+          if (maxPlayerSuit > maxWinnerSuit) {
+            winner = player
+          }
+        }
         if (playerMax > winnerMax) {
           winner = player
         } else if (playerMax == winnerMax) {
