@@ -162,23 +162,34 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     for (player <- players) {
       var combinedList: List[Int] = List()
       for (ele <- player.privHand) {
-        if (!combinedList.contains(ele)) {
-          combinedList = combinedList :+ ele.cardValue
+        if (!combinedList.contains(ele.cardValue)) {
+          if (ele.cardValue == 14) {
+            combinedList = combinedList :+ 1
+            combinedList = combinedList :+ ele.cardValue
+          } else {
+            combinedList = combinedList :+ ele.cardValue
+          }
         }
       }
       for (ele <- table) {
-        if (!combinedList.contains(ele)) {
-          combinedList = combinedList :+ ele.cardValue
+        if (!combinedList.contains(ele.cardValue)) {
+          if (ele.cardValue == 14) {
+            combinedList = combinedList :+ 1
+            combinedList = combinedList :+ ele.cardValue
+          } else {
+            combinedList = combinedList :+ ele.cardValue
+          }
         }
       }
       combinedList = combinedList.sorted
+      //println(combinedList)
       var inputStraight: String = ""
       for (ele <- combinedList) {
         inputStraight = inputStraight + ele.toString
       }
-      println(inputStraight)
+      //println(inputStraight)
       val possibleStraights: List[String] = List(
-        "142345",
+        "12345",
         "23456",
         "34567",
         "45678",
@@ -192,6 +203,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       var straightCount: Int = 0
       for (ele <- possibleStraights) {
         if (inputStraight.contains(ele)) {
+          player.straightBy = ele.toInt
           straightCount += 1
         }
       }
@@ -203,6 +215,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
 
   def isFlush(): Unit = {
     for (player <- players) {
+      val currentRank: String = player.handRank
       val firstSuit: String = player.privHand.head.cardSuit
       val secondSuit: String = player.privHand(1).cardSuit
       var combinedSuits: List[String] = List()
@@ -226,6 +239,9 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
       //println(countList)
       if (countList.max >= 5) {
         player.handRank = handRankings(5)
+      }
+      if (countList.max >= 5 && currentRank == handRankings(6)) {
+        player.handRank = handRankings(2)
       }
     }
   }
@@ -263,6 +279,9 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
         if (tableHand == 8) {
           player.handRank = handRankings(4)
         }
+      }
+      if (player.handRank == handRankings(7) && player.privHand.head.cardValue == player.privHand(1).cardValue && tableHand == 2) {
+        player.handRank = handRankings(4)
       }
     }
   }
@@ -381,6 +400,13 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
           }
           if (maxPlayerSuit > maxWinnerSuit) {
             winner = player
+          }
+        } else if (player.winnerWeight == 5 || player.winnerWeight == 9) {
+          if (player.straightBy > winner.straightBy) {
+            winner = player
+          } else if (player.straightBy == winner.straightBy) {
+            val winnerConcat: String = winner.name + ", " + player.name
+            return winnerConcat
           }
         }
         if (playerMax > winnerMax) {

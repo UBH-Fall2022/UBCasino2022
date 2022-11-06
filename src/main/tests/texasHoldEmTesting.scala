@@ -56,6 +56,65 @@ object texasHoldEmTesting {
 
   }
 
+  def straightFlushTest(): Unit = {
+
+    val ej: Player = new Player("ej")
+
+    val TenofHearts: Card = new Card()
+    TenofHearts.setSuit("D")
+    TenofHearts.setSign("A")
+
+    val JackofHearts:Card = new Card()
+    JackofHearts.setSuit("D")
+    JackofHearts.setSign("2")
+
+    val QueenofHearts:Card = new Card()
+    QueenofHearts.setSuit("D")
+    QueenofHearts.setSign("3")
+
+    val KingofHearts:Card = new Card()
+    KingofHearts.setSuit("D")
+    KingofHearts.setSign("4")
+
+    val AceofHearts:Card = new Card()
+    AceofHearts.setSuit("D")
+    AceofHearts.setSign("5")
+
+    ej.privHand = ej.privHand :+ AceofHearts
+    ej.privHand = ej.privHand :+ KingofHearts
+
+    val gamePlayers: ArrayBuffer[Player] = ArrayBuffer(ej)
+
+    val fourTestGame: texasHoldem = new texasHoldem(gamePlayers)
+
+    fourTestGame.addCards(2)
+
+    fourTestGame.table = fourTestGame.table :+ QueenofHearts
+    fourTestGame.table = fourTestGame.table :+ JackofHearts
+    fourTestGame.table = fourTestGame.table :+ TenofHearts
+
+    fourTestGame.calculateHands()
+
+    var i: Int = 1
+    println("Table: ")
+    for (c <- fourTestGame.table) {
+      println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
+      i += 1
+    }
+    println("")
+    i = 1
+    println(ej.name)
+    for (c <- ej.privHand) {
+      println("Card " + i + ": " + c.cardValue + " of " + c.cardSuit)
+      i += 1
+    }
+    println(ej.handRank)
+    println("")
+
+    println("Winner: " + fourTestGame.computeWinner())
+
+  }
+
   def straightTest(): Unit = {
 
     val ej: Player = new Player("ej")
@@ -232,6 +291,7 @@ object texasHoldEmTesting {
   }
 
   def main(args: Array[String]): Unit = {
+    //straightFlushTest()
     //straightTest()
     gameTest()
     //royalflush()
