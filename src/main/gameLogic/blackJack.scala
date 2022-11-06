@@ -7,7 +7,7 @@ import scala.collection.mutable._
 class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   var PlayerToValue: Map[Character, Int] = Map()
   val dealer: Dealer = new Dealer
-
+  
   def valueCount(player: Character): Int ={
     var ret: Int = 0
     var aces: Int = 0

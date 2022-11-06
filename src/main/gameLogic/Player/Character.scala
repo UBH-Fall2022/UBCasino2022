@@ -14,6 +14,35 @@ abstract class Character {
   var twoPairBy2: Int = 0
   var in: Boolean = false
   
+  def displayBJ(): Unit = {
+    for (ele <- privHand) {
+      if (ele.cardValue == 11) {
+        println("Jack of " + ele.cardSuit)
+      } else if (ele.cardValue == 12) {
+        println("Queen of " + ele.cardSuit)
+      } else if (ele.cardValue == 13) {
+        println("King of " + ele.cardSuit)
+      } else if (ele.cardValue == 14) {
+        println("Ace of " + ele.cardSuit)
+      } else {
+        println(ele.cardValue + " of " + ele.cardSuit)
+      }
+    }
+    for (ele <- publHand) {
+      if (ele.cardValue == 11) {
+        println("Jack of " + ele.cardSuit)
+      } else if (ele.cardValue == 12) {
+        println("Queen of " + ele.cardSuit)
+      } else if (ele.cardValue == 13) {
+        println("King of " + ele.cardSuit)
+      } else if (ele.cardValue == 14) {
+        println("Ace of " + ele.cardSuit)
+      } else {
+        println(ele.cardValue + " of " + ele.cardSuit)
+      }
+    }
+  }
+
   def displayCards(): Unit = {
     for (ele <- privHand) {
       if (ele.cardValue == 11) {
