@@ -158,6 +158,49 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     }
   }
 
+  def isStraight(): Unit = {
+    for (player <- players) {
+      var combinedList: List[Int] = List()
+      for (ele <- player.privHand) {
+        if (!combinedList.contains(ele)) {
+          combinedList = combinedList :+ ele.cardValue
+        }
+      }
+      for (ele <- table) {
+        if (!combinedList.contains(ele)) {
+          combinedList = combinedList :+ ele.cardValue
+        }
+      }
+      combinedList = combinedList.sorted
+      var inputStraight: String = ""
+      for (ele <- combinedList) {
+        inputStraight = inputStraight + ele.toString
+      }
+      println(inputStraight)
+      val possibleStraights: List[String] = List(
+        "142345",
+        "23456",
+        "34567",
+        "45678",
+        "56789",
+        "678910",
+        "7891011",
+        "89101112",
+        "910111213",
+        "1011121314"
+      )
+      var straightCount: Int = 0
+      for (ele <- possibleStraights) {
+        if (inputStraight.contains(ele)) {
+          straightCount += 1
+        }
+      }
+      if (straightCount > 0) {
+        player.handRank = handRankings(6)
+      }
+    }
+  }
+
   def isFlush(): Unit = {
     for (player <- players) {
       val firstSuit: String = player.privHand.head.cardSuit
@@ -227,15 +270,17 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   def isRoyalFlush(): Unit = {
     for (player <- players) {
       if (player.handRank == handRankings(5)) {
-        var inputHand: List[Int] = List(
-          player.privHand.head.cardValue,
-          player.privHand(1).cardValue,
-          table.head.cardValue,
-          table(1).cardValue,
-          table(2).cardValue,
-          table(3).cardValue,
-          table(4).cardValue
-        )
+        var inputHand: List[Int] = List()
+        for (ele <- player.privHand) {
+          if (ele.cardSuit == flushBy) {
+            inputHand = inputHand :+ ele.cardValue
+          }
+        }
+        for (ele <- table) {
+          if (ele.cardSuit == flushBy) {
+            inputHand = inputHand :+ ele.cardValue
+          }
+        }
         inputHand = inputHand.sorted
         val expectedHand: List[Int] = List(
           10,
@@ -244,7 +289,13 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
           13,
           14
         )
-        if (inputHand.contains(expectedHand)) {
+        var need: Int = 0
+        for (ele <- inputHand) {
+          if (expectedHand.contains(ele)) {
+            need = need + 1
+          }
+        }
+        if (need == 5) {
           player.handRank = handRankings(1)
         }
       }
@@ -279,6 +330,7 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     isPair()
     twoPair()
     isTrio()
+    isStraight()
     isFlush()
     isFullHouse()
     isRoyalFlush()
