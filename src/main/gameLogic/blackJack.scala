@@ -31,7 +31,7 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
         ret+=aces
       }
     }
-    if(!player.privHand.isEmpty){
+    if(player.privHand.nonEmpty){
       val priv: Int = player.privHand.head.cardValue
       if(priv < 14){
         ret += Math.min(priv, 10)
@@ -55,7 +55,7 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     PlayerToValue = PlayerToValue + ((dealer) -> valueCount(dealer))
   }
 
-  def giveWinnings(winners: List[Player]): Unit ={
+  def giveWinnings(winners: List[Character]): Unit ={
     val per: Int = pot/(winners.length)
     for(player<-winners){
       player.balance+=per
@@ -97,7 +97,7 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
 
   def hit(player: Character): Unit = {
     if(player.in){
-      player.privHand :+ deck.dealCard()
+      player.publHand = player.publHand :+ deck.dealCard()
     }
     if(valueCount(player) > 21){
       player.in = false
@@ -105,9 +105,9 @@ class blackJack(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
   }
 
   def doubleDown(player: Player): Unit = {
-    if(player.balance >= participate){
-      player.publHand :+ deck.dealCard()
-      player.balance -= participate
+    if (player.balance >= participate) { 
+       player.publHand = player.publHand :+ deck.dealCard()
+       player.balance -= participate
     }
   }
 
