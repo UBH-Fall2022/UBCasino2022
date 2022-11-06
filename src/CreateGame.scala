@@ -72,10 +72,10 @@ object CreateGame {
       } else if(read == "Bet") {
         println("Enter bet amount.")
         read = readLine()
-        newGame.bet(myPlayer, read.toInt)
+        newGame.placeBet(myPlayer, read.toInt)
         for (player <- Players) {
           if (player != myPlayer) {
-              newGame.bet(player, newGame.currBet)
+              newGame.placeBet(player, newGame.currBet)
           }
         }
       } else {
@@ -136,10 +136,10 @@ object CreateGame {
       } else if(read == "Bet") {
         println("Enter bet amount.")
         read = readLine()
-        newGame.bet(myPlayer, read.toInt)
+        newGame.placeBet(myPlayer, read.toInt)
         for (player <- Players) {
           if (player != myPlayer) {
-            newGame.bet(player, newGame.currBet)
+            newGame.placeBet(player, newGame.currBet)
           }
         }
       } else {
@@ -199,10 +199,10 @@ object CreateGame {
       } else if(read == "Bet") {
         println("Enter bet amount.")
         read = readLine()
-        newGame.bet(myPlayer, read.toInt)
+        newGame.placeBet(myPlayer, read.toInt)
         for (player <- Players) {
           if (player != myPlayer) {
-            newGame.bet(player, newGame.currBet)
+            newGame.placeBet(player, newGame.currBet)
           }
         }
       } else {
@@ -262,10 +262,10 @@ object CreateGame {
       } else if(read == "Bet") {
         println("Enter bet amount.")
         read = readLine()
-        newGame.bet(myPlayer, read.toInt)
+        newGame.placeBet(myPlayer, read.toInt)
         for (player <- Players) {
           if (player != myPlayer) {
-            newGame.bet(player, newGame.currBet)
+            newGame.placeBet(player, newGame.currBet)
           }
         }
       } else {
@@ -294,9 +294,17 @@ object CreateGame {
 
       println(newGame.computeWinner() + " wins!")
 
-
-
-
+      val winnerString: String = newGame.gameWinner
+      var winnerPlayer: Player = new Player("null")
+      for (ele <- Players) {
+        if (ele.name == winnerString) {
+          winnerPlayer = ele
+        }
+      }
+      println("Winning Hand: " + winnerPlayer.handRank)
+      println(winnerPlayer.displayCards())
+      println("")
+      println("Your balance: " + myPlayer.balance)
 
 
     }
