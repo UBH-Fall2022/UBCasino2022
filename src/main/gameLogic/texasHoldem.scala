@@ -275,4 +275,45 @@ class texasHoldem(initPlayers: ArrayBuffer[Player]) extends Game(initPlayers) {
     isRoyalFlush()
   }
 
+  def computeWinner(): String = {
+    var winner: Player = new Player("null")
+    val winnerMap: Map[String, Int] = Map(
+      "Royal Flush" -> 10,
+      "Straight Flush" -> 9,
+      "Four Of A Kind" -> 8,
+      "Full House" -> 7,
+      "Flush" -> 6,
+      "Straight" -> 5,
+      "Three Of A Kind" -> 4,
+      "Two Pair" -> 3,
+      "Pair" -> 2,
+      "High Card" -> 1
+    )
+
+    for (player <- players) {
+      player.winnerWeight = winnerMap(player.handRank)
+    }
+    for (player <- players) {
+      if (player.winnerWeight > winner.winnerWeight) {
+        winner = player
+      } else if (player.winnerWeight == winner.winnerWeight) {
+        val playerCardValues: List[Int] = List(player.privHand.head.cardValue, player.privHand(1).cardValue)
+        val winnerCardValues: List[Int] = List(winner.privHand.head.cardValue, winner.privHand(1).cardValue)
+        val winnerMax = winnerCardValues.max
+        val playerMax = playerCardValues.max
+        if (playerMax > winnerMax) {
+          winner = player
+        } else if (playerMax == winnerMax) {
+          if (playerCardValues.sum > winnerCardValues.sum) {
+            winner = player
+          } else if (playerCardValues.sum == winnerCardValues.sum) {
+            val winnerConcat: String = winner.name + ", " + player.name
+            return winnerConcat
+          }
+        }
+      }
+    }
+    winner.name
+  }
+
 }

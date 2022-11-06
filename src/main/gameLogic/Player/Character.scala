@@ -7,6 +7,7 @@ abstract class Character {
   var publHand: List[Card] = List()
   var privHand: List[Card] = List()
   var handRank: String = "High Card"
+  var winnerWeight: Int = 0
   var in: Boolean = false
 
   def changePrice(balance: Int): Unit = {
