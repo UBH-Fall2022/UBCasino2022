@@ -15,12 +15,15 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
 
     val myPlayer: Player = Players.head
     
+    myPlayer.clearCards()
+    
     println("Type Start to Deal")
     println("")
     
     val d = readLine()
     if (d == "Start") {
       newGame.deal()
+      newGame.valueCount(myPlayer)
       newGame.bet(myPlayer, 25)
     }
     
@@ -37,6 +40,9 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
     if (read == "Hit"){
       newGame.hit(myPlayer)
       if (!myPlayer.in) {
+        println("Your Cards: ")
+        myPlayer.displayBJ()
+        println("")
         println("BUST!")
         myPlayer.clearCards()
         return 
@@ -55,6 +61,9 @@ class blackjackState(var Players :ArrayBuffer[Player]) extends State {
         }
       }
       if (!myPlayer.in) {
+        println("Your Cards: ")
+        myPlayer.displayBJ()
+        println("")
         println("Bust!")
         myPlayer.clearCards()
         return
