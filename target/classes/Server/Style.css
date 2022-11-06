@@ -1,0 +1,23 @@
+*{
+background: cyan;
+
+
+}
+
+
+button {
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    border: black;
+    color: black;
+    background: darkred;
+    cursor: pointer;
+    border-radius: 10px;
+}
+button:hover{
+    background: white;
+}
+
+
+
+
