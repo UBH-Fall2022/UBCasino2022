@@ -75,6 +75,13 @@ class slotState(Players :ArrayBuffer[Player]) extends State {
         }
         println("Your Balance is " + player.balance)
       }
+
+      println("Would you like to spin again Y/N")
+      var ans = readLine()
+      if(ans.toLowerCase == "n")
+        return
+
+
     }
     
     

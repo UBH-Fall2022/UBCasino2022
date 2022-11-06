@@ -17,7 +17,7 @@ object CreateGame {
     println("---------------------------------")
     println("Write A Name To Add A Player Max Players is 6 \n \n \n")
     println("---------------------------------")
-    while (warped != "Done") {
+    while (warped.toLowerCase() != "done") {
       println("Enter Player Name or Enter Done to Continue: ")
       println("")
       warped = readLine()
@@ -60,7 +60,7 @@ object CreateGame {
 
 
       gamemode.run()
-        print("Type Done if you are done \n If not press enter")
+        println(" \nType Done if you are done \n If not press enter")
       endGame = readLine()
     }
 
