@@ -1,3 +1,4 @@
+import main.State.{State, blackjackState, pokerState}
 import main.gameLogic.{Game, blackJack, texasHoldem}
 import main.gameLogic.Player.Player
 
@@ -5,6 +6,7 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.io.StdIn.readLine
 
 object CreateGame {
+  var gamemode :State
   def main(args: Array[String]): Unit = {
     var Players :ArrayBuffer[Player] = ArrayBuffer()
 
@@ -29,11 +31,16 @@ object CreateGame {
     println("Enter 1 for Texas Hold Em")
     println("Enter 2 for Blackjack")
     var game = readLine()
-    var gamemode :Game = new Game(Players)
     if(game.toLowerCase() == "blackjack")
       {
-        gamemode = new blackJack(Players)
+        gamemode = new blackjackState(Players)
       }
+    else if(game.toLowerCase() == "texas hold em"){
+      gamemode = new pokerState(Players)
+    }
+
+    gamemode.run()
+
 
   }
 }
